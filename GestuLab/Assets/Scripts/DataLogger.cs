@@ -5,15 +5,15 @@ public class DataLogger : MonoBehaviour
 {
     [SerializeField] private string logFileName = "data_log.txt";
 
-    [SerializeField] private float logInterval = 1f;
+    [SerializeField] private float logInterval = 0.5f;
 
     [SerializeField] private GameObject redCube = null;
 
     [SerializeField] private GameObject blueCube = null;
 
-    public bool pressLeftArrow = false;
+    public bool selectRedCube = false;
 
-    public bool pressRightArrow = false;
+    public bool selectBlueCube = false;
 
     private void Start()
     {
@@ -25,8 +25,10 @@ public class DataLogger : MonoBehaviour
     {
         while (true)
         {
-            string logEntry = $"{Time.time:F2}, {redCube.transform.position}, {blueCube.transform.position}, {pressLeftArrow}, {pressRightArrow}\n";
+            string logEntry = $"{Time.time:F2}, {redCube.transform.position}, {blueCube.transform.position}, {selectRedCube}, {selectBlueCube}\n";
             System.IO.File.AppendAllText(logFileName, logEntry);
+            if (selectRedCube) selectRedCube = false;
+            if (selectBlueCube) selectBlueCube = false;
             yield return new WaitForSeconds(logInterval);
         }
     }
