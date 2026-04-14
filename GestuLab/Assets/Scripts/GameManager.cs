@@ -46,21 +46,21 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            PreviousGIF();
-        }
+        //if (Input.GetKeyDown(KeyCode.LeftArrow))
+        //{
+        //    PreviousGIF();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            NextGIF();
-        }
+        //if (Input.GetKeyDown(KeyCode.RightArrow))
+        //{
+        //    NextGIF();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            redCube.GetComponent<Cube>().ResetTransform();
-            blueCube.GetComponent<Cube>().ResetTransform();
-        }
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    redCube.GetComponent<Cube>().ResetTransform();
+        //    blueCube.GetComponent<Cube>().ResetTransform();
+        //}
     }
 
     private void PreviousGIF()
@@ -90,5 +90,17 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(durationPerGIF);
             NextGIF();
         }
+    }
+
+    public void SelectRedCube()
+    {
+        dataLogger.selectRedCube = true;
+        print("Red cube selected");
+    }
+
+    public void SelectBlueCube()
+    {
+        dataLogger.selectBlueCube = true;
+        print("Blue cube selected");
     }
 }

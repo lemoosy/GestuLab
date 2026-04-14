@@ -549,7 +549,19 @@ MonoBehaviour:
       m_Calls: []
   m_FirstSelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2088698355}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SelectRedCube
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_LastSelectExited:
     m_PersistentCalls:
       m_Calls: []
@@ -2617,47 +2629,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 419802670}
   m_CullTransparentMesh: 1
---- !u!21 &427400666
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/RoundedCorners
-  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _WidthHeightRadius: {r: 50, g: 40, b: 14, a: 0}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1001 &429893752
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2838,7 +2809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 427400666}
+  m_Material: {fileID: 1708611927}
   m_Color: {r: 0, g: 0, b: 0, a: 0.8627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -4678,11 +4649,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4253f32900bcc4d499d675566142ded0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Interactors.XRDirectInteractor
-  m_InteractionManager: {fileID: 682620008}
+  m_InteractionManager: {fileID: 0}
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 4294967295
   m_Handedness: 1
-  m_AttachTransform: {fileID: 779014386}
+  m_AttachTransform: {fileID: 0}
   m_KeepSelectedTargetValid: 1
   m_DisableVisualsWhenBlockedInGroup: 1
   m_StartingSelectedInteractable: {fileID: 0}
@@ -4763,7 +4734,7 @@ MonoBehaviour:
     m_ManualQueueWasCompletedThisFrame: 0
     m_ManualQueueValue: 0
     m_ManualQueueTargetFrame: 0
-  m_SelectActionTrigger: 1
+  m_SelectActionTrigger: 0
   m_AllowHoveredActivate: 0
   m_TargetPriorityMode: 0
   m_HideControllerOnSelect: 0
@@ -5031,6 +5002,7 @@ GameObject:
   m_Component:
   - component: {fileID: 682620009}
   - component: {fileID: 682620008}
+  - component: {fileID: 682620010}
   m_Layer: 0
   m_Name: XR Interaction Manager
   m_TagString: Untagged
@@ -5067,6 +5039,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &682620010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682620007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017c5e3933235514c9520e1dace2a4b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Inputs.InputActionManager
+  m_ActionAssets:
+  - {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!1001 &698620443
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5758,7 +5744,19 @@ MonoBehaviour:
       m_Calls: []
   m_FirstSelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2088698355}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SelectBlueCube
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_LastSelectExited:
     m_PersistentCalls:
       m_Calls: []
@@ -6987,8 +6985,8 @@ MonoBehaviour:
   logInterval: 1
   redCube: {fileID: 80147022}
   blueCube: {fileID: 756058437}
-  pressLeftArrow: 0
-  pressRightArrow: 0
+  selectRedCube: 0
+  selectBlueCube: 0
 --- !u!1001 &936471530
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7160,7 +7158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Interactors.XRDirectInteractor
   m_InteractionManager: {fileID: 0}
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 4294967295
   m_Handedness: 0
   m_AttachTransform: {fileID: 656222565}
   m_KeepSelectedTargetValid: 1
@@ -11209,6 +11207,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
   m_Asset: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_ActionId: ee6bf5bf-bb0a-4a50-8327-cb654b19e298
+--- !u!21 &1708611927
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/RoundedCorners
+  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _WidthHeightRadius: {r: 50, g: 40, b: 14, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1 &1710423424
 GameObject:
   m_ObjectHideFlags: 0
@@ -13429,19 +13468,19 @@ MonoBehaviour:
   - {fileID: 32900000, guid: c5af31c9073bf6140b18f88ff2c0b3f0, type: 3}
   - {fileID: 32900000, guid: 46fb30a088ec81f4397841096820925f, type: 3}
   descriptionListGIF:
-  - Description 1
-  - Description 2
-  - Description 3
-  - Description 4
-  - Description 5
-  - Description 6
-  - Description 7
-  - Description 8
-  - Description 9
-  - Description 10
-  - Description 11
-  - Description 12
-  - Description 13
+  - Translation sur l'axe X
+  - Translation sur l'axe Y
+  - Translation sur l'axe Z
+  - Translation sur l'axe XY
+  - Translation sur l'axe XZ
+  - Translation sur l'axe YZ
+  - Rotation sur l'axe X
+  - Rotation sur l'axe Y
+  - Rotation sur l'axe Z
+  - Lancer en avant
+  - "Lanc\xE9 \xE0 droite"
+  - "Lanc\xE9 en arri\xE8re"
+  - Empilement d'objets
   audioListGIF:
   - {fileID: 0}
   - {fileID: 0}
@@ -13461,7 +13500,7 @@ MonoBehaviour:
   blueCube: {fileID: 756058437}
   videoGIF: {fileID: 727933393}
   descriptionGIF: {fileID: 1130249159}
-  durationPerGIF: 15
+  durationPerGIF: 20
   dataLogger: {fileID: 934635162}
 --- !u!82 &2088698356
 AudioSource:
