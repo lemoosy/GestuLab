@@ -1,38 +1,49 @@
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class GameManager : MonoBehaviour
 {
     private int GIFIndex = 0;
 
-    [SerializeField] private List<Sprite> GIFSpriteList = new List<Sprite>();
+    [SerializeField] private List<VideoClip> VideoListGIF = new List<VideoClip>();
 
-    [SerializeField] private List<string> GIFDescriptionList = new List<string>();
+    [SerializeField] private List<string> DescriptionListGIF = new List<string>();
 
     [SerializeField] private GameObject redCube = null;
 
     [SerializeField] private GameObject blueCube = null;
+    
+    [SerializeField] private VideoPlayer videoGIF = null;
 
-    void Start()
+    [SerializeField] private TextMeshProUGUI descriptionGIF = null;
+
+    [SerializeField] private float durationPerGIF = 15f;
+
+    private void Start()
     {
-        Debug.Assert(GIFSpriteList.Count > 0, "GIFSpriteList is empty. Please add sprites to the GIF Sprite List in the inspector.");
-        Debug.Assert(GIFDescriptionList.Count > 0, "GIFDescriptionList is empty. Please add descriptions to the GIF Description List in the inspector.");
-        Debug.Assert(GIFSpriteList.Count == GIFDescriptionList.Count, "GIFSpriteList and GIFDescriptionList must have the same number of elements. Please ensure both lists are synchronized in the inspector.");
+        Debug.Assert(VideoListGIF.Count > 0, "VideoListGIF is empty. Please add video clips to the GIF Video List in the inspector.");
+        Debug.Assert(DescriptionListGIF.Count > 0, "DescriptionListGIF is empty. Please add descriptions to the GIF Description List in the inspector.");
+        Debug.Assert(VideoListGIF.Count == DescriptionListGIF.Count, "VideoListGIF and DescriptionListGIF must have the same number of elements. Please ensure both lists are synchronized in the inspector.");
         Debug.Assert(redCube != null, "redCube is not assigned. Please assign the Red Cube GameObject in the inspector.");
         Debug.Assert(blueCube != null, "blueCube Cube is not assigned. Please assign the Blue Cube GameObject in the inspector.");
+        Debug.Assert(videoGIF != null, "videoGIF is not assigned. Please assign the VideoClip for the GIF in the inspector.");
+        Debug.Assert(descriptionGIF != null, "descriptionGIF is not assigned. Please assign the TextMeshProUGUI component in the inspector.");
+        StartCoroutine(DisplayGIF());
     }
 
-    void Update()
+    private void Update()
     {
-        // Commandes
-
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            PreviousGIF();
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
+            NextGIF();
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -42,13 +53,30 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void PreviousGIF()
+    private void PreviousGIF()
     {
+        if (GIFIndex == 0) return;
+        StopCoroutine(DisplayGIF());
         GIFIndex--;
+        StartCoroutine(DisplayGIF());
     }
 
-    public void NextGIF()
+    private void NextGIF()
     {
+        if (GIFIndex == VideoListGIF.Count - 1) return;
+        StopCoroutine(DisplayGIF());
         GIFIndex++;
+        StartCoroutine(DisplayGIF());
+    }
+
+    private IEnumerator DisplayGIF()
+    {
+        while (true)
+        {
+            descriptionGIF.text = DescriptionListGIF[GIFIndex];
+            videoGIF.clip = VideoListGIF[GIFIndex];
+            yield return new WaitForSeconds(durationPerGIF);
+            NextGIF();
+        }
     }
 }
