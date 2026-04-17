@@ -1,7 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 using UnityEngine.Video;
 
 public class GameManager : MonoBehaviour
@@ -24,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI descriptionGIF = null;
 
-    [SerializeField] private float durationPerGIF = 15f;
+    [SerializeField] private TextMeshProUGUI GIFCounter = null;
 
     [SerializeField] private DataLogger dataLogger = null;
 
@@ -41,66 +42,99 @@ public class GameManager : MonoBehaviour
         Debug.Assert(videoGIF != null, "videoGIF is not assigned. Please assign the VideoClip for the GIF in the inspector.");
         Debug.Assert(descriptionGIF != null, "descriptionGIF is not assigned. Please assign the TextMeshProUGUI component in the inspector.");
         Debug.Assert(dataLogger != null, "dataLogger is not assigned. Please assign the DataLogger component in the inspector.");
-        StartCoroutine(DisplayGIF());
+        ResetGIF();
     }
 
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.LeftArrow))
-        //{
-        //    PreviousGIF();
-        //}
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            PreviousGIF();
+        }
 
-        //if (Input.GetKeyDown(KeyCode.RightArrow))
-        //{
-        //    NextGIF();
-        //}
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            NextGIF();
+        }
 
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    redCube.GetComponent<Cube>().ResetTransform();
-        //    blueCube.GetComponent<Cube>().ResetTransform();
-        //}
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            ResetGIF();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            redCube.GetComponent<Cube>().ResetTransform();
+            blueCube.GetComponent<Cube>().ResetTransform();
+        }
+
+        foreach (var device in InputSystem.devices)
+        {
+            foreach (var control in device.allControls)
+            {
+                if (control is ButtonControl button)
+                {
+                    if (button.wasPressedThisFrame)
+                    {
+                        dataLogger.GetComponent<DataLogger>().ExportData(
+                            GIFIndex,
+                            button.name,
+                            true
+                        );
+                    }
+
+                    if (button.wasReleasedThisFrame)
+                    {
+                        dataLogger.GetComponent<DataLogger>().ExportData(
+                            GIFIndex,
+                            button.name,
+                            false
+                        );
+                    }
+                }
+            }
+        }
     }
 
     private void PreviousGIF()
     {
         if (GIFIndex == 0) return;
-        StopCoroutine(DisplayGIF());
         GIFIndex--;
-        StartCoroutine(DisplayGIF());
+        descriptionGIF.text = descriptionListGIF[GIFIndex];
+        videoGIF.clip = videoListGIF[GIFIndex];
+        audioSource.clip = audioListGIF[GIFIndex];
+        audioSource.Play();
+        GIFCounter.text = $"{GIFIndex + 1} / 15";
     }
 
     private void NextGIF()
     {
-        if (GIFIndex == videoListGIF.Count - 1) return;
-        StopCoroutine(DisplayGIF());
+        if (GIFIndex == descriptionListGIF.Count - 1) return;
         GIFIndex++;
-        StartCoroutine(DisplayGIF());
+        descriptionGIF.text = descriptionListGIF[GIFIndex];
+        videoGIF.clip = videoListGIF[GIFIndex];
+        audioSource.clip = audioListGIF[GIFIndex];
+        audioSource.Play();
+        GIFCounter.text = $"{GIFIndex + 1} / 15";
     }
 
-    private IEnumerator DisplayGIF()
+    public void ResetGIF()
     {
-        while (true)
-        {
-            descriptionGIF.text = descriptionListGIF[GIFIndex];
-            videoGIF.clip = videoListGIF[GIFIndex];
-            audioSource.clip = audioListGIF[GIFIndex];
-            audioSource.Play();
-            yield return new WaitForSeconds(durationPerGIF);
-            NextGIF();
-        }
+        videoGIF.clip = videoListGIF[GIFIndex];
+        videoGIF.Play();
+        audioSource.clip = audioListGIF[GIFIndex];
+        audioSource.Play();
+        descriptionGIF.text = descriptionListGIF[GIFIndex];
+        GIFCounter.text = $"{GIFIndex + 1} / 15";
     }
 
     public void SelectRedCube()
     {
         dataLogger.selectRedCube = true;
-        print("Red cube selected");
     }
 
     public void SelectBlueCube()
     {
         dataLogger.selectBlueCube = true;
-        print("Blue cube selected");
     }
 }

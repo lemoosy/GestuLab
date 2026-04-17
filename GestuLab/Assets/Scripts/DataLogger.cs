@@ -18,18 +18,20 @@ public class DataLogger : MonoBehaviour
     private void Start()
     {
         logFileName = "Assets/Logs/" + logFileName;
-        StartCoroutine(ExportData());
     }
 
-    private IEnumerator ExportData()
+    public void ExportData(int idGIF, string butonName, bool press)
     {
-        while (true)
-        {
-            string logEntry = $"{Time.time:F2}, {redCube.transform.position}, {blueCube.transform.position}, {selectRedCube}, {selectBlueCube}\n";
-            System.IO.File.AppendAllText(logFileName, logEntry);
-            if (selectRedCube) selectRedCube = false;
-            if (selectBlueCube) selectBlueCube = false;
-            yield return new WaitForSeconds(logInterval);
-        }
+        string logEntry = $"" +
+            $"{Time.time:F2}," +
+            $"{idGIF}," +
+            $"{butonName}," +
+            $"{press}," +
+            $"{redCube.transform.position}," +
+            $"{redCube.transform.rotation}," +
+            $"{blueCube.transform.position}," +
+            $"{blueCube.transform.rotation}\n";
+
+        System.IO.File.AppendAllText(logFileName, logEntry);
     }
 }

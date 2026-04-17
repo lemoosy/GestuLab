@@ -2,16 +2,18 @@ using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
-    private Transform transformBase = null;
+    public Vector3 positonStart = Vector3.zero;
+    public Quaternion rotationStart = Quaternion.identity;
 
     private void Start()
     {
-        transformBase = transform;
+        positonStart = transform.position;
+        rotationStart = transform.rotation;
     }
 
     public void ResetTransform()
     {
-        transform.position = transformBase.position;
-        transform.rotation = transformBase.rotation;
+        transform.position = positonStart;
+        transform.rotation = rotationStart;
     }
 }
